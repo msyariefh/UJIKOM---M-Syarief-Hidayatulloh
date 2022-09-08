@@ -22,12 +22,19 @@ namespace Quiz.Gameplay
         private void OnEnable()
         {
             _quizController.onPlayerAnswer += AnswerQuestion;
+            _countdownController.onFinishCountdown += TimesUp;
         }
 
         private void OnDisable()
         {
             _quizController.onPlayerAnswer -= AnswerQuestion;
+            _countdownController.onFinishCountdown -= TimesUp;
         }
+
+        private void TimesUp()
+        {
+            _gameplayScene.GoToLevelScene();
+        } 
         private void AnswerQuestion(int answer)
         {
             _countdownController.StopCountdown();
